@@ -26,7 +26,7 @@ public class DBUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Connection getConnection(String jdbcName) throws Exception {
+	public Connection getConnectionPool(String jdbcName) throws Exception {
 		Connection connection = null;
 		try {
 			DataSource ds = null;
@@ -62,13 +62,48 @@ public class DBUtils {
 			}
 		}
 	}
+	
+	/**
+	 * 取單一DB連線
+	 * @param dbKind
+	 * @param dbParams
+	 * @return
+	 * @throws Exception
+	 */
+	public Connection getConnectionDirect(String dbKind, Map<String, String> dbParams) throws Exception{
+		Connection conn = null;
+		try {
+			// 1.載入 JDBC 驅動程式
+			Class.forName(dbParams.get(dbKind + "_DRIVER"));
+
+			// 2.提供JDBC URL
+			String dbUrl = dbParams.get(dbKind + "_URL");
+			String userId = dbParams.get(dbKind + "_USER");
+			String passWord = dbParams.get(dbKind + "_PASS");
+
+			// 3.取得Connection
+			conn = DriverManager.getConnection(dbUrl, userId, passWord);
+
+			if (!conn.isClosed()) {
+				System.out.println("資料庫連線成功");
+			}
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("找不到驅動程式類別");
+
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+
+		}
+		return conn;
+	}
 
 	/**
 	 * 關閉連線
 	 * 
 	 * @param con
 	 */
-	public static void closeConnection(Connection con) {
+	public void closeConnection(Connection con) {
 		if (null != con) {
 			try {
 				con.close();
@@ -87,8 +122,8 @@ public class DBUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static List<Map<String, String>> queryDataByStatement(String queryString, Connection con) throws Exception {
-		
+	public List<Map<String, String>> queryDataByStatement(String queryString, Connection con) throws Exception {
+
 		if (null == con) {
 			throw new Exception("連線為空，請先取得連線後再操作..!");
 		}
@@ -115,7 +150,7 @@ public class DBUtils {
 			}
 		} catch (Exception e) {
 			throw new Exception("查詢資料發生異常, e:" + e.getMessage());
-			
+
 		} finally {
 
 			if (null != rs) {
@@ -129,17 +164,19 @@ public class DBUtils {
 		}
 		return rtnList;
 	}
-	
+
 	/**
 	 * 使用 PreparedStatement 查詢
+	 * 
 	 * @param queryString
 	 * @param paramMap
 	 * @param con
 	 * @return
 	 * @throws Exception
 	 */
-	public static List<Map<String, String>> queryDataByPreparedStatement(String queryString, Map<String, String> paramMap, Connection con) throws Exception {
-		
+	public List<Map<String, String>> queryDataByPreparedStatement(String queryString,
+			Map<String, String> paramMap, Connection con) throws Exception {
+
 		if (null == con) {
 			throw new Exception("連線為空，請先取得連線後再操作..!");
 		}
@@ -166,7 +203,7 @@ public class DBUtils {
 			}
 		} catch (Exception e) {
 			throw new Exception("查詢資料發生異常, e:" + e.getMessage());
-			
+
 		} finally {
 
 			if (null != rs) {

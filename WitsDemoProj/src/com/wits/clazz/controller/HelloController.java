@@ -14,6 +14,9 @@ import com.wits.clazz.utils.DBUtils;
 
 @Controller
 public class HelloController {
+	
+
+	DBUtils dbutils = new DBUtils();
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String helloWorld(Model model) {
@@ -21,12 +24,12 @@ public class HelloController {
 
 		Connection con = null;
 		try {
-			con = DBUtils.getConnection("ACCESS");
+			con = dbutils.getConnectionPool("ACCESS");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
-		DBUtils.closeConnection(con);
+		dbutils.closeConnection(con);
 
 		return "HelloWorld";
 	}
@@ -52,7 +55,7 @@ public class HelloController {
 		
 		try {
 			// 取得 access 的連線
-			Connection con = DBUtils.getConnection("access");
+			Connection con = dbutils.getConnectionPool("access");
 			
 			// 檢核參數
 			if (StringUtils.isBlank(empId)) {
@@ -76,7 +79,7 @@ public class HelloController {
 				sqlSb.append("' ");
 			}
 			
-			List<Map<String, String>> rtnList = DBUtils.queryDataByStatement(sqlSb.toString(), con);
+			List<Map<String, String>> rtnList = dbutils.queryDataByStatement(sqlSb.toString(), con);
 			
 			for (Map<String, String> maps : rtnList) {
 				System.out.println(maps.get("JIRA_NO"));
