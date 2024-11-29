@@ -63,7 +63,7 @@ public class BatchClazz {
 			
 			sb.setLength(0);
 			sb.append("update city ");
-			sb.append("set population = population + 20 ");
+			sb.append("set population = population - 20 ");
 			sb.append("where countrycode = ?");
 			
 			PreparedStatement pstmt = con.prepareStatement(sb.toString());
