@@ -26,7 +26,7 @@ SourceTree
 https://product-downloads.atlassian.com/software/sourcetree/windows/ga/SourceTreeSetup-3.4.21.exe
 
 Apache maven 3.9.9
-https://dlcdn.apache.org/maven/maven-3/3.9.9/source/apache-maven-3.9.9-src.zip
+https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.zip
 
 nodeJs
 https://nodejs.org/en/download/prebuilt-binaries
