@@ -96,5 +96,52 @@ public class HelloController {
 		
 		return "Java1Rpt";
 	}
+	
+	@RequestMapping(value = "/doPromptCity", method = RequestMethod.GET)
+	public String doPromptCity(Model model) {
+		//model.addAttribute("jiraNo", "LIPGMASGMT-10192");
+
+		return "city";
+	}
+	
+	@RequestMapping(value = "/doQueryCity", method = RequestMethod.POST)
+	public String doQueryCity(String countryCode, String district, Model model) {
+		model.addAttribute("countryCode", countryCode);
+		model.addAttribute("district", district);
+		
+		try {
+			// 取得 access 的連線
+			Connection con = dbutils.getConnectionPool("mysQL");
+			
+			// 檢核參數
+			if (StringUtils.isBlank(countryCode)) {
+				model.addAttribute("errMsg", "CountryCode為必填條件..!");
+				throw new Exception("error");
+			}
+			
+			StringBuffer sqlSb = new StringBuffer();
+			sqlSb.append("select * ");
+			sqlSb.append("from city ");
+			sqlSb.append("where countrycode = '");
+			sqlSb.append(countryCode);
+			sqlSb.append("' ");
+			
+			// sqlInjection ' or '1'='1
+			if (StringUtils.isNotBlank(district)) {
+				sqlSb.append(" and district = '");
+				sqlSb.append(district);
+				sqlSb.append("' ");
+			}
+			
+			List<Map<String, String>> rtnList = dbutils.queryDataByStatement(sqlSb.toString(), con);
+			
+			model.addAttribute("cityRst", rtnList);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return "city";
+	}
 
 }
