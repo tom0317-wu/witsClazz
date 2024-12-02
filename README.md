@@ -12,3 +12,12 @@ https://code.visualstudio.com/Download
 
 Spring Tools 4 for Eclipse
 https://spring.io/tools
+
+MySQL
+https://downloads.mysql.com/archives/community/
+
+visual studio redistribution  2019
+https://learn.microsoft.com/en-us/visualstudio/releases/2019/redistribution#--download
+
+Java 23
+https://download.oracle.com/java/23/latest/jdk-23_windows-x64_bin.msi
