@@ -21,3 +21,6 @@ https://learn.microsoft.com/en-us/visualstudio/releases/2019/redistribution#--do
 
 Java 23
 https://download.oracle.com/java/23/latest/jdk-23_windows-x64_bin.msi
+
+SourceTree
+https://product-downloads.atlassian.com/software/sourcetree/windows/ga/SourceTreeSetup-3.4.21.exe
