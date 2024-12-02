@@ -24,3 +24,9 @@ https://download.oracle.com/java/23/latest/jdk-23_windows-x64_bin.msi
 
 SourceTree
 https://product-downloads.atlassian.com/software/sourcetree/windows/ga/SourceTreeSetup-3.4.21.exe
+
+Apache maven 3.9.9
+https://dlcdn.apache.org/maven/maven-3/3.9.9/source/apache-maven-3.9.9-src.zip
+
+nodeJs
+https://nodejs.org/en/download/prebuilt-binaries
