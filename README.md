@@ -23,8 +23,6 @@
 [nodeJs](https://nodejs.org/en/download/prebuilt-binaries)
 
 ## Spring Boot 3 | Vue 3 教學
-[【Vue 3】Vue 3.0 初学入门使用教学】](https://www.youtube.com/playlist?list=PLliocbKHJNwuozzzF3gWnRjVOrX1tA9k5)
-[小馬技術](https://github.com/komavideo/LearnVue3?tab=readme-ov-file)
 
 [【尚硅谷】SpringBoot3零基础教程](https://www.youtube.com/playlist?list=PLmOn9nNkQxJEeIH75s5pdTUnCo9-xOc7c)
 
